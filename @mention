@@ -1,0 +1,41 @@
+//TODO track #altbooktitle
+
+Twitter.stream('statuses/filter', {track: '@Book__Title_Bot'}, function(stream) {
+  stream.on('data', function(tweet) {
+    
+    var txt = tweet.text;
+    var username = tweet.user.screen_name;
+    var real_name = tweet.user.name;
+    var tweet_id = tweet.id_str;
+    
+    console.log('===========STREAM STARTS===========');
+    console.log('-----------------------------------\n@' + username + " says: " + txt);
+    console.log("TID: " + tweet_id + ". TSTAMP: " + tweet.created_at + '\n-----------------------------------');
+    
+    var posReplys = ["I am Bot the Great and Powerful.", "I am BookBot the Grey.","I am BookTitle, Good Bot of the North.",
+    "I am a Bot from Outer Space!", "I am an adventure Bot!", "I'm Botman.", "I am Sher-Bot Holmes. A pleasure.",
+    "The name's Bot, Book Bot.","I am Captain Bot Sparrow.","I am BookBot Baggins, lovely to meet you."];
+    
+    var reply = "Hi @" + username + ", " + posReplys[java.util.Random(10)];
+    
+    // parameters that twitter accepts, along with text
+    var params = {
+        status : reply,
+        in_reply_to_status_id : tweet_id,
+        in_reply_to_screen_name : username,
+    };
+    
+    // post the composed tweet..
+    Twitter.post('statuses/update', params, function(err, data, response) {
+        if (err) {
+            console.log("Error is: " + err);
+        } else {
+            console.log('Tweeted: ' + params.status);
+        }
+    })
+  });
+
+  stream.on('error', function(error) {
+    console.log(error);
+  });
+});
