@@ -13,10 +13,10 @@ Twitter.stream('statuses/filter', {track: '@Book__Title_Bot'}, function(stream) 
     console.log("TID: " + tweet_id + ". TSTAMP: " + tweet.created_at + '\n-----------------------------------');
     
     var posReplys = ["I am Bot the Great and Powerful.", "I am BookBot the Grey.","I am BookTitle, Good Bot of the North.",
-    "I am a Bot from Outer Space!", "I am an adventure Bot!", "I'm Botman.", "I am Sher-Bot Holmes. A pleasure.",
+    "I am a Bot from Outer Space!", "I am BookTitle, Bot of Thunder!", "I'm Botman.", "I am Sher-Bot Holmes. A pleasure.",
     "The name's Bot, Book Bot.","I am Captain Bot Sparrow.","I am BookBot Baggins, lovely to meet you."];
     
-    var reply = "Hi @" + username + ", " + posReplys[java.util.Random(10)];
+    var reply = "Hi @" + username + ", " + posReplys[Math.floor(Math.random() * 10)];
     
     // parameters that twitter accepts, along with text
     var params = {
